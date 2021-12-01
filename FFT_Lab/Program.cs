@@ -43,7 +43,7 @@ namespace FFT_Lab
             int P = width / 2;
             int Q = height / 2;
             double D;
-            int D0 = 30;
+            int D0 = 30; //сила фильтрации
             int option = Chosen;
 
             for (int i = 0; i < width; i++)
