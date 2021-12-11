@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Drawing;
 using System.Numerics;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace FFT_Lab
 {
     public class Filter
     {
-        public static Complex w(int k, int N)
+        private static Complex w(int k, int N)
         {
             if (k % N == 0) return 1;
             double arg = -2 * Math.PI * k / N;
             return new Complex(Math.Cos(arg), Math.Sin(arg));
         }
-        public static Complex[] FFT1D(Complex[] x1, int option)
+
+        private static Complex[] FFT1D(Complex[] x1, int option)
         {
             Complex[] X;
             int N = x1.Length;
@@ -43,7 +43,8 @@ namespace FFT_Lab
             }
             return X;
         }
-        public static Complex[,] FFT2D(Complex[,] x, int option)
+
+        private static Complex[,] FFT2D(Complex[,] x, int option)
         {
             Complex[,] result = new Complex[Program.width, Program.height];
             // строки
