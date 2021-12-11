@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Numerics;
 
 namespace FFT_Lab
@@ -10,9 +11,7 @@ namespace FFT_Lab
         public static int width, height;
         private static int FilterOption; //опция выбора частного фильтра
         public static Bitmap originalPic ;
-        //public static Bitmap originalPic = new Bitmap(Image.FromFile($@"{SaveExt.Desktop}\1.jpg"));
-
-
+        
         static void Main(string[] args)
         {
             if (args.Length > 0)
@@ -62,12 +61,14 @@ namespace FFT_Lab
             return Filter.FFTInverse(FFT);
         }
 
-        public static class SaveExt
+        private static class SaveExt
         {
-            public static readonly string Desktop = $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
+            private static readonly string Desktop = $@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             public static void Image(Bitmap bitmap, string name)
             {
-                bitmap.Save($@"{Desktop}\{name}.jpg", ImageFormat.Png);
+                if (File.Exists($@"{Desktop}\{name}.jpg"))
+                    File.Delete($@"{Desktop}\{name}.jpg");
+                bitmap.Save($@"{Desktop}\{name}.jpg", ImageFormat.Jpeg);
             }
         }
     }
